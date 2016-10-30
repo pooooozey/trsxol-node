@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<title>说明</title>
+		<link rel="stylesheet" type="text/css" href="/css/font.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+		<style type="text/css">
+			#popBg{ z-index:9;}
+			#tipNext{ width:60px; text-align:center; height:20px; line-height:20px; background:#fff; position:fixed; left:50%; top:50%; margin:40px 0 0 -30px; color:#3f51b5; font-size:14px; z-index:22;}
+			.toget-cards .card{ z-index:21;}
+			.ready-cards .card{ z-index:20;}
+			.card .card-positive{ -webkit-transform:rotateY(0deg); transform:rotateY(0deg);}
+		</style>
+		<script src="/js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var tipNum = 0;
+				var togetCards = $("#toget-cards .card");
+				var selfCards = $("#self .card");
+				$("#tip").html("每人获得6张牌，分别以1张、2张和3张分成三组，并每组牌单独与其他玩家对比").show();
+				$("#tipNext").click(function(){
+					tipNum++;
+					if(tipNum==1){
+						$("#tip").html("第一组，按照最小2，最大A规则比大小，最大胜一番，最小负一番，其他玩家无影响").show();
+						togetCards.eq(0).animate({left:selfCards.eq(0).offset().left,top:selfCards.eq(0).offset().top});
+					}else if(tipNum==2){
+						$("#tip").html("第二组，按“十点半”规则比较，A为1，人物牌为0.5，两张牌分数超过10.5则为0。按大小对比，最大胜两番，最小负两番。").show();
+						togetCards.eq(1).animate({left:selfCards.eq(1).offset().left,top:selfCards.eq(1).offset().top});
+						togetCards.eq(2).animate({left:selfCards.eq(2).offset().left,top:selfCards.eq(2).offset().top});
+					}else if(tipNum==3){
+						$("#tip").html("第三组，按炸金花规则进行对比，最大胜三番，最小负三番，其他玩家无影响。豹子收税三番，非豹子玩家都要缴纳；顺金为一番。").show();
+						togetCards.eq(3).animate({left:selfCards.eq(3).offset().left,top:selfCards.eq(3).offset().top});
+						togetCards.eq(4).animate({left:selfCards.eq(4).offset().left,top:selfCards.eq(4).offset().top});
+						togetCards.eq(5).animate({left:selfCards.eq(5).offset().left,top:selfCards.eq(5).offset().top});
+					}else if(tipNum==4){
+						$("#tip").html("继续点击，开始游戏吧").show();
+						$(this).html("开始游戏")
+					}else{
+						window.opener=null;window.open('','_self');window.close();
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="body">
+			<div id="tip">
+				<span class="text"></span>
+			</div>
+			<div id="tipNext">继续</div>
+			<div class="head">
+				<div id="room-self"><span class="iconfont">&#xe620; </span><span class="txt">房间名</span></div>
+				<div id="username-self"><span class="iconfont">&#xe60a; </span><span class="txt">玩家名</span></div>
+				<div id="score"><span class="iconfont">&#xe612;</span><span class="s">3000&nbsp;&nbsp;</span></div>
+			</div>
+
+			<!-- 刚获得的手牌 -->
+			<div class="toget-cards" id="toget-cards">
+				<div class="card">
+					<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+				</div>
+				<div class="card">
+					<div class="card-positive club"><span class="num">6</span><span class="iconfont">&#xe603;</span></div>
+				</div>
+				<div class="card">
+					<div class="card-positive diamond"><span class="num">10</span><span class="iconfont">&#xe61f;</span></div>
+				</div>
+				<div class="card">
+					<div class="card-positive spade"><span class="num">J</span><span class="iconfont">&#xe61e;</span></div>
+				</div>
+				<div class="card">
+					<div class="card-positive diamond"><span class="num">5</span><span class="iconfont">&#xe604;</span></div>
+				</div>
+				<div class="card">
+					<div class="card-positive heart"><span class="num">7</span><span class="iconfont">&#xe61f;</span></div>
+				</div>
+			</div>
+			<!-- 刚获得的手牌 end -->
+			
+
+			<!-- 已准备好的手牌 -->
+			<div class="ready-cards" id="self">
+				<div class="cards">
+					<div class="card">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 已准备好的手牌 end -->
+
+			<!-- 其他玩家的牌 -->
+			<div class="other-player" id="other-player">
+				<div class="player" id="player1">
+					<div class="userinfo">
+						<span class="username"><span class="iconfont iconfont1">&#xe60a; </span><span class="s">用户名</span></span>
+						<span class="score"><span class="iconfont">&#xe612;</span><span class="s">3000&nbsp;&nbsp;</span></span>
+					</div>
+					<div class="cards">
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="player" id="player2">
+					<div class="userinfo">
+						<span class="username"><span class="iconfont iconfont1">&#xe60a;</span><span class="s">用户名</span></span>
+						<span class="score"><span class="iconfont">&#xe612;</span><span class="s">3000&nbsp;&nbsp;</span></span>
+					</div>
+					<div class="cards">
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- 其他玩家的牌 end -->
+			
+		</div>
+		<div id="popBg"></div>
+
+	</body>
+</html>

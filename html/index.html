@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<title>node版纸牌铁人三项</title>
+		<link rel="stylesheet" type="text/css" href="/css/font.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+  		<script src="/socket.io/socket.io.js"></script>
+		<script src="/js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/poker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/player.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/tool.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/control.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/play.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="body">
+			<a href="define.html" target="_blank" class="howToPlay">玩法说明</a>
+
+			<div class="head">
+				<div id="room-self"><span class="iconfont">&#xe620; </span><span class="txt">房间名</span></div>
+				<div id="username-self"><span class="iconfont">&#xe60a; </span><span class="txt">玩家名</span></div>
+				<div id="score"><span class="iconfont">&#xe612;</span><span class="s">3000&nbsp;&nbsp;</span></div>
+			</div>
+
+			<div id="tip">
+				<span class="text">自动消失的提示信息</span>
+			</div>
+			<div id="tool">
+				<a href="javascript:;" class="reset">重置</a>
+				<a href="javascript:;" class="ready banned">开始</a>
+				<a href="javascript:;" class="next">下一局</a>
+			</div>
+			
+			<!-- 刚获得的手牌 -->
+			<div class="toget-cards" id="toget-cards">
+				<div class="card">
+					<div class="card-box">
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+						<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-box">
+						<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-box">
+						<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-box">
+						<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-box">
+						<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-box">
+						<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+						<div class="card-back">
+							<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 刚获得的手牌 end -->
+			
+
+			<!-- 已准备好的手牌 -->
+			<div class="ready-cards" id="self">
+				<div class="cards">
+					<div class="card">
+						<div class="card-box">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-box">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-box">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-box">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-box">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-box">
+							<div class="card-back">
+								<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 已准备好的手牌 end -->
+
+			<!-- 其他玩家的牌 -->
+			<div class="other-player" id="other-player">
+				<div class="player" id="player1">
+					<div class="userinfo">
+						<span class="username"><span class="iconfont iconfont1">&#xe60a; </span><span class="s">用户名</span></span>
+						<span class="score"><span class="iconfont">&#xe612;</span><span class="s">3000&nbsp;&nbsp;</span></span>
+					</div>
+					<div class="cards">
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="player" id="player2">
+					<div class="userinfo">
+						<span class="username"><span class="iconfont iconfont1">&#xe60a;</span><span class="s">用户名</span></span>
+						<span class="score"><span class="iconfont">&#xe612;</span><span class="s">3000&nbsp;&nbsp;</span></span>
+					</div>
+					<div class="cards">
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-box">
+								<div class="card-positive spade"><span class="num">A</span><span class="iconfont">&#xe603;</span></div>
+								<div class="card-back">
+									<span class="iconfont">&#xe61e;&#xe61f;<br>&#xe604;&#xe603;</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- 其他玩家的牌 end -->
+			
+		</div>
+
+		<!-- 弹出输入框 -->
+		<div id="popBg"></div>
+		<div id="roomList">
+			<div class="roomTitle">房间列表</div>
+			<ul>
+				<li>没有房间</li>
+			</ul>
+			<div class="createRoom">创建或搜索房间</div>
+		</div>
+		<div class="pop">
+			<dl class="iptRoom">
+				<dt>房间名</dt>
+				<dd>
+					<input type="text" class="ipt" placeholder="请输入房间名">
+					<input type="submit" class="btn" value="确定">
+				</dd>
+			</dl>
+			<dl class="iptName">
+				<dt>用户名</dt>
+				<dd>
+					<input type="text" class="ipt" placeholder="请输入用户名">
+					<input type="submit" class="btn" value="确定" >
+				</dd>
+			</dl>
+			<dl class="userList">
+				<dt>等待其他玩家加入</dt>
+				<dd>
+					<ul>
+						<li><span class="ready">已准备</span><span class="iconfont">&#xe60a;</span><span class="txt">玩家名</span></li>
+						<li><span class="iconfont">&#xe609;</span><span class="txt">电脑A</span></li>
+						<li><span class="iconfont">&#xe609;</span><span class="txt">电脑B</span></li>
+					</ul>
+					<input type="submit" class="btn" value="准备">
+				</dd>
+			</dl>
+		</div>
+		<!-- 弹出输入框 end -->
+
+
+	</body>
+</html>

@@ -1,0 +1,126 @@
+a:active {outline: none;star:expression(this.onFocus=this.blur());}
+*{margin:0;padding:0;list-style:none;outline:none;word-wrap:break-word;}
+img{border:none}
+table{table-layout:fixed; border-collapse:collapse}
+a{ text-decoration:none;}
+.fb{ font-weight:bold;}
+body,html{ height:100%; position:relative; overflow:hidden;}
+body{ font-family:Tahoma,Arial,Roboto,"Droid Sans","Helvetica Neue","Droid Sans Fallback","Heiti SC",sans-self; font-size:12px;}
+input{ -webkit-appearance:none; border-radius:0;}
+
+
+.body{}
+.head{ height:44px; line-height:44px; background:#3f51b5; color:#fff; overflow:hidden;}
+.howToPlay{ width:60px; text-align:center; margin:0 0 0 -30px; position:fixed; left:50%; top:10px; color:#fff; font-size:14px; z-index:200;}
+#room-self{ float:left; margin:0 2% 0 2%;}
+#username-self{ float:left;}
+#username-self .iconfont{ font-size:16px;}
+#score{ float:right; margin:0 2% 0 0;}
+#tip{ display:none; width:90%; color:#fff; text-align:center; position:absolute; left:5%; top:50%; z-index:110; margin:-15px 0 0 0; font-size:14px;}
+#tip .text{ padding:10px 15px; background:#000; opacity:0.85; border-radius:5px;}
+#tool{ width:100%; text-align:center; position:absolute; left:0; top:50%; margin:15px 0 0 0;}
+#tool a{ padding:0 25px; height:24px; line-height:24px; border:1px solid #3f51b5; color:#3f51b5; display:inline-block;}
+#tool .banned{ opacity:0.5;}
+#tool .next{ display:none;}
+#tool .btnShow{ display:inline-block !important;}
+
+#popBg{ width:100%; height:100%; background:#000; opacity:0.7; filter:alpha(opacity=70); position:fixed; left:0; top:0; z-index:100;}
+.pop{ width:160px; position:fixed; left:50%; top:50%; margin:0 0 0 -80px; z-index:100;}
+.pop dl{ display:none; margin:-50px 0 0 0; background:#fff;}
+.pop .iptRoom{ display:block;}
+.pop .userList{ _display:block; line-height:24px; color:#3f51b5; margin:-70px 0 0 0;}
+.pop .userList .iconfont{ font-size:16px; margin:0 5px 0 10px;}
+.pop .userList .ready{ float:right; margin:0 5px 0 0;}
+.pop dt{ height:34px; line-height:34px; font-size:14px; background:#3f51b5; color:#fff; text-align:center;}
+.pop dd{}
+.pop .ipt{ width:100%; border:none; text-align:center; padding:6px 0; height:14px; line-height:14px;}
+.pop .btn{ width:100%; height:26px; line-height:26px; text-align:center; background:#3f51b5; color:#fff; border:none;}
+.pop .btn.userReady{ background:#7b8be6;}
+#roomList{ width:200px; background:#fff; color:#3f51b5; height:160px; padding:30px 0 30px 0; overflow:hidden; position:fixed; left:50%; top:50%; margin:-110px 0 0 -100px; z-index:101;}
+#roomList .roomTitle{ width:100%; height:30px; line-height:30px; background:#3f51b5; color:#fff; text-align:center; position:absolute; left:0; top:0;}
+#roomList .createRoom{ width:100%; height:30px; line-height:30px; background:#3f51b5; color:#fff; text-align:center; position:absolute; left:0; bottom:0;}
+#roomList ul{ width:100%; height:100%; overflow-y:scroll;}
+#roomList li{ line-height:30px; height:30px; overflow:hidden; margin:5px 0; text-align:center; cursor:pointer;}
+#roomList li:hover{ background:#8495f3; color:#fff;}
+#roomList a{ color:blue; display:block;}
+
+/*.card{ width:10%; padding:15% 0 0 0; margin:0 1% 0 0; box-shadow:1px 1px 1px 1px #000; float:left; color:#3f51b5; border:1px solid #3f51b5; border-radius:5px; position:relative;}*/
+.card{ width:10%; padding:15% 0 0 0; margin:0 1% 0 0; float:left; color:#3f51b5; border-radius:5px; position:relative;}
+.card-back{ width:100%; height:100%; text-align:center; color:#fff; background:#3f51b5; position:absolute; left:0; top:0;}
+.card-back .iconfont{ width:100%; position:absolute; left:0; top:50%; margin:-30% 0 0 0;}
+.card-positive{ width:100%; height:100%; background:#fff; position:absolute; left:0; top:0;}
+.card-positive .num{ font-size:30px; position:absolute; left:5%; top:0; transform-origin:50% 100%; transition:400ms;}
+.card-positive .iconfont{ font-size:30px; position:absolute; right:5%; bottom:5%; transform-origin:50% 100%; transition:300ms;}
+.spade{ color:#000;}
+.heart{ color:#9d2933;}
+.club{ color:#000;}
+.diamond{ color:#9d2933;}
+
+.card{ -webkit-perspective:800px;}
+.card-box{ width:100%; height:100%; border:1px solid #3f51b5; position:absolute; left:0; top:0; transition:1000ms; transform:rotateY(0deg); -webkit-transform:rotateY(0deg); transform-style:preserve-3d; -webkit-transform-style:preserve-3d;}
+.card .card-back{ opacity:1; transition:1ms 270ms;}
+.card .card-positive{ transform:rotateY(-180deg); -webkit-transform:rotateY(-180deg);}
+.card.showPoker .card-box{ transform:rotateY(180deg); -webkit-transform:rotateY(180deg);}
+.card.showPoker .card-back{ opacity:0;}
+
+.card.lose{ transition:300ms;}
+.card.lose .card-positive{ background:#b5b5b5; transition:400ms;}
+.card.lose .card-positive .num{ transition:400ms 300ms; transform:rotate(180deg);}
+.card.showPoker:nth-child(3) .num{ transition:400ms 450ms;}
+.card.showPoker:nth-child(5) .num{ transition:400ms 500ms;}
+.card.showPoker:nth-child(6) .num{ transition:400ms 650ms;}
+.card.lose .card-positive .iconfont{ transition:300ms 500ms; bottom:0; transform:rotate(20deg);}
+.card.showPoker:nth-child(3) .iconfont{ transition:300ms 650ms;}
+.card.showPoker:nth-child(5) .iconfont{ transition:300ms 800ms;}
+.card.showPoker:nth-child(6) .iconfont{ transition:300ms 950ms;}
+
+.other-player .card.win{}
+.card.win .card-box{ border-color:#9d2933;}
+.card.win .card-positive .num{ transition:400ms; transform:scale(2); left:15%; top:15%; transform-origin:center;}
+.card.win .card-positive .iconfont{ transform:scale(1.2);}
+
+
+.other-player{ -display:none;}
+.other-player .card{ width:15%; padding:22% 0 0 0; transition:400ms;}
+.other-player .showPoker{ z-index:1; top:5px; opacity:0.9;}
+.other-player .iconfont{ font-size:14px; margin:-16px 0 0 0;}
+.other-player .card .iconfont{ font-size:30px;}
+.other-player .card-back .iconfont{ font-size:14px;}
+.other-player .userinfo{ overflow:hidden; font-size:14px; color:#3f51b5; margin:0 0 10px 0;}
+#player1{ width:50%; position:absolute; left:4%; top:60px;}
+#player1 .card{ float:left; margin:0 0 0 -4%;}
+#player2{ width:50%; position:absolute; right:-13%; top:60px;}
+#player2 .card{ /*float:right;*/  margin:0 0 0 -4%;}
+
+.ready-cards{}
+.ready-cards .card{ position:absolute; left:0; top:70%;}
+.ready-cards .card:nth-child(1){ left:14%;}
+.ready-cards .card:nth-child(2){ left:29%;}
+.ready-cards .card:nth-child(3){ left:40%;}
+.ready-cards .card:nth-child(4){ left:55%;}
+.ready-cards .card:nth-child(5){ left:66%;}
+.ready-cards .card:nth-child(6){ left:77%;}
+
+.toget-cards{}
+.toget-cards .card{ position:absolute; left:0; top:17%; z-index:10;}
+.toget-cards .card:nth-child(1){ left:18%;}
+.toget-cards .card:nth-child(2){ left:29%;}
+.toget-cards .card:nth-child(3){ left:40%;}
+.toget-cards .card:nth-child(4){ left:51%;}
+.toget-cards .card:nth-child(5){ left:62%;}
+.toget-cards .card:nth-child(6){ left:73%;}
+
+
+@media screen and (max-width:620px){
+	.card-back .iconfont{ font-size:14px;}
+	.card-positive .num{ font-size:20px;}
+	.card-positive .iconfont{ font-size:20px;}
+	.other-player .card .iconfont{ font-size:14px;}
+}
+@media screen and (max-width:460px){
+	.card-back .iconfont{ font-size:12px;}
+	.card-positive .num{ font-size:18px;}
+	.card-positive .iconfont{ font-size:18px;}
+	.other-player .card .iconfont{ font-size:12px;}
+
+}
